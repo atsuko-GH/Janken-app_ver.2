@@ -8,7 +8,7 @@
 　- 3回負けると、それまでの戦績が強制リセット
 
 ## ③アプリのデプロイURL
-デプロイしている場合はURLを記入（任意）
+https://atsuko-gh.github.io/Janken-app_ver.2/
 
 ## ④アプリのログイン用IDまたはPassword（ある場合）
 - ID: 〇〇〇〇〇〇〇〇
