@@ -1,0 +1,613 @@
+/* =========================================================
+   かぶってたたいてじゃんけんぽん  ポップなデザイン版
+   ========================================================= */
+
+/* 丸っこくてかわいいフォント（ネットにつながっていないときは別のフォントになります） */
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&family=DotGothic16&display=swap");
+/* DotGothic16 は、スコアボードの数字に使うドット文字のフォント */
+
+/* ===== 色をまとめて管理する（ここを変えると全体の色が変わる） ===== */
+:root {
+    --ink: #2b2140;        /* 線と文字の色 */
+    --pink: #ff5fa2;
+    --yellow: #ffd93d;
+    --mint: #4fe3c1;
+    --sky: #5bc8ff;
+    --purple: #9b6bff;
+    --white: #ffffff;
+    --night: #1d1630;      /* スコアボードの背景（夜の色） */
+}
+
+/* ===== 全体 ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--ink);
+    font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Meiryo", sans-serif;
+    /* 水玉もようの背景 */
+    background-color: var(--yellow);
+    background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.55) 12px, transparent 13px),
+        radial-gradient(circle, rgba(255, 95, 162, 0.25) 8px, transparent 9px);
+    background-size: 64px 64px, 64px 64px;
+    background-position: 0 0, 32px 32px;
+}
+
+.game {
+    width: 100%;
+    max-width: 480px;
+    padding: 20px 16px;
+    text-align: center;
+}
+
+/* ===== タイトル（1行にして、縦の幅を短くする） ===== */
+.title {
+    display: inline-block;
+    margin: 0 0 20px;
+    padding: 6px 18px;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.3;
+    white-space: nowrap;   /* 途中で折り返さない */
+    color: var(--white);
+    background: var(--pink);
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    box-shadow: 4px 4px 0 var(--ink);
+    transform: rotate(-2deg);
+    /* 文字にフチをつける */
+    text-shadow:
+        2px 2px 0 var(--ink),
+        -2px 2px 0 var(--ink),
+        2px -2px 0 var(--ink),
+        -2px -2px 0 var(--ink);
+}
+
+/* ===== 対戦の表示エリア ===== */
+.board {
+    position: relative;   /* 「じゃん・けん・ぽん！」の文字を、この中の真ん中に重ねるため */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 18px 12px;
+    background: var(--white);
+    border: 4px solid var(--ink);
+    border-radius: 28px;
+    box-shadow: 6px 6px 0 var(--ink);
+}
+
+/* 「あなた」と「コンピューター」の幅を同じにして、VSを真ん中にする */
+.player {
+    flex: 1;
+}
+
+.player-name {
+    display: inline-block;
+    margin: 0;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 800;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+}
+
+/* 1人目（あなた）と2人目（コンピューター）で名札の色を変える */
+.player:first-of-type .player-name {
+    background: var(--mint);
+}
+
+.player:last-of-type .player-name {
+    background: var(--sky);
+}
+
+.hand {
+    margin: 10px 0 0;
+    font-size: 64px;
+    line-height: 1;
+    /* ふわふわ上下に動くアニメーション */
+    animation: float 1.6s ease-in-out infinite;
+}
+
+.player:last-of-type .hand {
+    animation-delay: 0.8s;   /* コンピューター側は少しずらす */
+}
+
+.vs {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--purple);
+    transform: rotate(-8deg);
+}
+
+/* ===== メッセージ（ふきだし風） ===== */
+.message {
+    position: relative;
+    min-height: 1.5em;
+    margin: 32px auto 22px;
+    padding: 10px 20px;
+    max-width: 340px;
+    font-size: 22px;
+    font-weight: 800;
+    background: var(--white);
+    border: 4px solid var(--ink);
+    border-radius: 999px;
+}
+
+/* ふきだしの三角 */
+.message::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: var(--white);
+    border-top: 4px solid var(--ink);
+    border-left: 4px solid var(--ink);
+    transform: translateX(-50%) rotate(45deg);
+}
+
+/* ===== ボタン ===== */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.btn {
+    width: 104px;
+    padding: 14px 0 10px;
+    font-family: inherit;
+    font-size: 44px;
+    line-height: 1;
+    background: var(--white);
+    border: 4px solid var(--ink);
+    border-radius: 24px;
+    box-shadow: 0 6px 0 var(--ink);
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+    touch-action: manipulation;              /* スマホでダブルタップしても拡大しない */
+    -webkit-tap-highlight-color: transparent; /* スマホでタップしたときの青い四角を消す */
+}
+
+/* グー・チョキ・パーで色を変える */
+#btn-gu {
+    background: var(--pink);
+}
+
+#btn-choki {
+    background: var(--mint);
+}
+
+#btn-pa {
+    background: var(--sky);
+}
+
+/* ボタンの中の小さい文字（グー、チョキ…） */
+.btn span {
+    display: block;
+    margin-top: 6px;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--ink);
+}
+
+/* マウスを乗せると、ぴょこっと浮く
+   （スマホだとタップ後に浮いたままになるので、マウスがある端末だけ） */
+@media (hover: hover) {
+    .btn:hover {
+        transform: translateY(-4px) rotate(-3deg);
+        box-shadow: 0 10px 0 var(--ink);
+    }
+}
+
+/* 押したとき、沈む */
+.btn:active {
+    transform: translateY(6px);
+    box-shadow: 0 0 0 var(--ink);
+}
+
+.btn-tataku {
+    width: 140px;
+    background: var(--yellow);
+}
+
+.btn-kaburu {
+    width: 140px;
+    background: var(--purple);
+}
+
+.btn-kaburu span {
+    color: var(--white);
+}
+
+/* ===== もう一回ボタン ===== */
+.btn-restart {
+    margin-top: 8px;
+    padding: 14px 36px;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--white);
+    background: var(--purple);
+    border: 4px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 0 6px 0 var(--ink);
+    cursor: pointer;
+    animation: pulse 1.2s ease-in-out infinite;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-restart:active {
+    transform: translateY(6px);
+    box-shadow: 0 0 0 var(--ink);
+}
+
+/* ===== 戦績のスコアボード ===== */
+/* 「SCORE」・3つのマス・リセットボタンを横1列に並べる */
+.scoreboard {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 20px;
+    padding: 6px 8px;
+    background: var(--night);
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 4px 4px 0 var(--ink);
+}
+
+.scoreboard-title {
+    margin: 0;
+    font-family: "DotGothic16", monospace;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    color: var(--yellow);
+}
+
+.btn-reset {
+    flex-shrink: 0;   /* せまい画面でもボタンがつぶれない */
+    padding: 4px 10px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--ink);
+    background: var(--white);
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 3px 0 #000;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-reset:active {
+    transform: translateY(3px);
+    box-shadow: 0 0 0 #000;
+}
+
+/* 勝ち・負け・セーフの3つのマス（残りの幅をぜんぶ使う） */
+.scoreboard-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+
+/* マスの中は「勝ち 03」のように、文字と数字を横に並べる */
+.score-cell {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 4px;
+    padding: 2px 0;
+    background: #000;
+    border: 2px solid #3d3358;
+    border-radius: 8px;
+}
+
+.score-label {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+/* マスごとに文字の色を変える */
+.score-win .score-label  { color: var(--pink); }
+.score-lose .score-label { color: var(--sky); }
+.score-safe .score-label { color: var(--mint); }
+
+/* 光っている電光掲示板のような数字 */
+.score-number {
+    margin: 0;
+    font-family: "DotGothic16", monospace;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--yellow);
+    text-shadow: 0 0 8px rgba(255, 217, 61, 0.8);
+}
+
+/* ===== 「じゃん・けん・ぽん！」の大きな文字 ===== */
+.call {
+    position: absolute;
+    inset: 0;               /* 対戦エリアいっぱいに広げる */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--yellow);
+    /* 文字に太いフチをつける */
+    text-shadow:
+        3px 3px 0 var(--ink),
+        -3px 3px 0 var(--ink),
+        3px -3px 0 var(--ink),
+        -3px -3px 0 var(--ink),
+        6px 6px 0 var(--ink);
+    opacity: 0;             /* ふだんは見えない */
+    pointer-events: none;   /* 文字がボタンなどのじゃまをしない */
+    z-index: 10;
+}
+
+/* .show が付くと、ドンッと出てきて消える */
+.call.show {
+    animation: call 0.5s ease-out forwards;
+}
+
+/* ===== 紙吹雪（JavaScriptで1枚ずつ作る） ===== */
+.confetti {
+    position: fixed;
+    top: -20px;
+    width: 10px;
+    height: 16px;
+    border-radius: 2px;
+    pointer-events: none;   /* 紙吹雪がボタンのじゃまをしない */
+    z-index: 100;
+    animation: fall 3s linear forwards;
+}
+
+/* ===== 花火の火花（JavaScriptで1つずつ作る） ===== */
+.spark {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;   /* 火花の真ん中が、花火の中心に来るように */
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);   /* キラッと光らせる */
+    pointer-events: none;
+    z-index: 200;
+    animation: burst 1.2s ease-out forwards;
+}
+
+/* ===== 負けが3回たまったときの「ざんねん」画面 ===== */
+.gameover {
+    position: fixed;
+    inset: 0;                         /* 画面いっぱいに広げる */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;                 /* 雨つぶが画面の外にはみ出さない */
+    background: rgba(29, 22, 48, 0.85);  /* 暗い色で画面をおおう */
+    z-index: 300;                     /* いちばん上に出す（下のボタンは押せなくなる） */
+    text-align: center;
+    animation: fadein 0.4s ease-out;
+}
+
+/* .hidden を付けたときは、ちゃんと消えるようにする */
+.gameover.hidden {
+    display: none;
+}
+
+.gameover-face {
+    margin: 0;
+    font-size: 96px;
+    line-height: 1;
+    /* 上から落ちてきて、そのあと左右にしょんぼりゆれる */
+    animation:
+        droop 0.8s ease-out both,
+        sway 1.2s ease-in-out 0.8s infinite;
+}
+
+.gameover-text {
+    margin: 12px 0 8px;
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--sky);
+    text-shadow:
+        3px 3px 0 var(--ink),
+        -3px 3px 0 var(--ink),
+        3px -3px 0 var(--ink),
+        -3px -3px 0 var(--ink);
+    animation: gakkuri 1s ease-out 0.3s both;
+}
+
+.gameover-sub {
+    margin: 0;
+    padding: 0 16px;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--white);
+    animation: fadein 0.5s ease-out 1s both;
+}
+
+/* 雨つぶ（JavaScriptで1つずつ作る） */
+.raindrop {
+    position: absolute;
+    top: -30px;
+    width: 3px;
+    height: 24px;
+    border-radius: 2px;
+    background: rgba(91, 200, 255, 0.7);
+    pointer-events: none;
+    animation: rain 0.8s linear infinite;
+}
+
+/* ===== アニメーションの動き ===== */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.06); }
+}
+
+/* 手が「ポンッ」と出てくる動き：小さい → 大きすぎ → ちょうどいい */
+@keyframes pop {
+    0%   { transform: scale(0); }
+    60%  { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+
+/* 「じゃん・けん・ぽん！」：大きい所から飛びこんできて、少し止まって、消える */
+@keyframes call {
+    0%   { opacity: 0; transform: scale(2.5) rotate(-8deg); }
+    25%  { opacity: 1; transform: scale(1) rotate(-8deg); }
+    80%  { opacity: 1; transform: scale(1.05) rotate(-8deg); }
+    100% { opacity: 0; transform: scale(1.2) rotate(-8deg); }
+}
+
+/* 花火：真ん中から外へ飛び散って、少し下に落ちながら消える
+   （--x と --y は、JavaScriptで火花ごとに入れた値） */
+@keyframes burst {
+    0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+    70%  { opacity: 1; }
+    100% { transform: translate(var(--x), calc(var(--y) + 40px)) scale(0.3); opacity: 0; }
+}
+
+/* ふわっと出てくる */
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* 泣き顔が上から落ちてくる */
+@keyframes droop {
+    0%   { opacity: 0; transform: translateY(-80px); }
+    60%  { opacity: 1; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* しょんぼり左右にゆれる */
+@keyframes sway {
+    0%, 100% { transform: rotate(-6deg); }
+    50%      { transform: rotate(6deg); }
+}
+
+/* 「ざんねん…」が落ちてきて、最後にガクッとかたむく */
+@keyframes gakkuri {
+    0%   { opacity: 0; transform: translateY(-100px) rotate(0deg); }
+    50%  { opacity: 1; transform: translateY(10px) rotate(0deg); }
+    70%  { transform: translateY(0) rotate(0deg); }
+    100% { opacity: 1; transform: translateY(8px) rotate(8deg); }
+}
+
+/* 雨つぶが上から下へ落ちる */
+@keyframes rain {
+    to { transform: translateY(110vh); }
+}
+
+/* 紙吹雪が回りながら下に落ちる動き */
+@keyframes fall {
+    to { transform: translateY(110vh) rotate(720deg); }
+}
+
+/* ===== JavaScriptで付けたり外したりするクラス ===== */
+/* .hidden が付いている要素は画面から消える */
+.hidden {
+    display: none;
+}
+
+/* .invisible は見えなくするだけで、場所は残す（まわりがガタッと動かない） */
+.invisible {
+    visibility: hidden;
+}
+
+/* .pop が付くと「ポンッ」のアニメーションが動く（ふわふわより優先） */
+.pop,
+.player:last-of-type .hand.pop {
+    animation: pop 0.4s ease-out;
+    animation-delay: 0s;
+}
+
+/* ===== スマホ用のレイアウト（画面の幅が480px以下のとき） ===== */
+@media (max-width: 480px) {
+    .game {
+        padding: 16px 12px;
+    }
+
+    .title {
+        margin-bottom: 16px;
+        padding: 5px 12px;
+        font-size: 16px;
+    }
+
+    /* せまい画面では「SCORE」の文字を消して、マスを広くする */
+    .scoreboard-title {
+        display: none;
+    }
+
+    .scoreboard {
+        margin-bottom: 16px;
+    }
+
+    .score-number {
+        font-size: 20px;
+    }
+
+    .call {
+        font-size: 48px;
+    }
+
+    .board {
+        padding: 14px 6px;
+    }
+
+    .player-name {
+        font-size: 11px;
+        padding: 3px 8px;
+    }
+
+    .hand {
+        font-size: 52px;
+    }
+
+    .vs {
+        font-size: 20px;
+    }
+
+    .message {
+        margin: 28px auto 20px;
+        padding: 8px 16px;
+        font-size: 18px;
+    }
+
+    /* ボタンは画面幅に合わせてのびちぢみする */
+    .buttons {
+        gap: 10px;
+    }
+
+    .btn {
+        flex: 1;
+        width: auto;
+        max-width: 110px;
+        font-size: 38px;
+    }
+
+    .btn-tataku,
+    .btn-kaburu {
+        max-width: 150px;
+    }
+}

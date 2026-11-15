@@ -1,0 +1,307 @@
+<mxfile host="65bd71144e">
+    <diagram id="s-tmJ8W6lh8f0jWV1oTB" name="ページ-1">
+        <mxGraphModel dx="557" dy="495" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="2000" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-47" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-1" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="0MwF-1yYoj_ba8JJR2SJ-53">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;" value="" vertex="1">
+                    <mxGeometry height="20" width="20" x="440" y="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-53" parent="1" style="html=1;strokeWidth=2;shape=manualInput;boundedLbl=1;whiteSpace=wrap;rounded=1;size=26;arcSize=11;" value="じゃんけんの手を選ぶ" vertex="1">
+                    <mxGeometry height="60" width="110" x="395" y="145" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e1" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-53" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-hide1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-hide1" parent="1" style="whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="じゃんけんボタンを隠す（連打対策）" vertex="1">
+                    <mxGeometry height="50" width="120" x="390" y="235" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e2" edge="1" parent="1" source="add-hide1" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-call">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-call" parent="1" style="shape=display;whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="「じゃん」「けん」「ぽん！」を1つずつ大きく表示" vertex="1">
+                    <mxGeometry height="50" width="150" x="375" y="310" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e3" edge="1" parent="1" source="add-call" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="0MwF-1yYoj_ba8JJR2SJ-64">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-64" parent="1" style="whiteSpace=wrap;html=1;" value="ランダムにじゃんけんの手を決める" vertex="1">
+                    <mxGeometry height="60" width="120" x="390" y="385" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e4" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-64" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-pop">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-pop" parent="1" style="shape=display;whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="両方の手を「ポンッ」と表示" vertex="1">
+                    <mxGeometry height="50" width="140" x="380" y="470" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e5" edge="1" parent="1" source="add-pop" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="0MwF-1yYoj_ba8JJR2SJ-93">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-93" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="&lt;div&gt;じゃんけんの勝敗（人）&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="60" width="130" x="385" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="勝ち" vertex="1">
+                    <mxGeometry height="30" width="60" x="334" y="545" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-22" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="負け" vertex="1">
+                    <mxGeometry height="30" width="60" x="385" y="605" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-46" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="あいこ" vertex="1">
+                    <mxGeometry height="30" width="60" x="510" y="580" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-45" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-93" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="0MwF-1yYoj_ba8JJR2SJ-53">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="570" y="575"/>
+                            <mxPoint x="570" y="175"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-63" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-93" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="0MwF-1yYoj_ba8JJR2SJ-91">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-23" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-93" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="0MwF-1yYoj_ba8JJR2SJ-91">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-91" parent="1" style="whiteSpace=wrap;html=1;" value="ランダムな制限時間を決めてタイマー開始" vertex="1">
+                    <mxGeometry height="60" width="120" x="220" y="635" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-13" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-91" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="0MwF-1yYoj_ba8JJR2SJ-92">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-92" parent="1" style="html=1;strokeWidth=2;shape=manualInput;boundedLbl=1;whiteSpace=wrap;rounded=1;size=26;arcSize=11;" value="たたくorかぶるを選ぶ" vertex="1">
+                    <mxGeometry height="60" width="110" x="225" y="725" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-90" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-92" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.498;exitY=0.874;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" target="0MwF-1yYoj_ba8JJR2SJ-81">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-81" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="制限時間内に選べた？" vertex="1">
+                    <mxGeometry height="40" width="120" x="220" y="810" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-35" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="超過" vertex="1">
+                    <mxGeometry height="30" width="60" x="165" y="800" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="以内" vertex="1">
+                    <mxGeometry height="30" width="60" x="215" y="850" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e6" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-81" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-hide2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-hide2" parent="1" style="whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="たたく・かぶるボタンを隠す（連打対策）" vertex="1">
+                    <mxGeometry height="45" width="130" x="215" y="880" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e7" edge="1" parent="1" source="add-hide2" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="0MwF-1yYoj_ba8JJR2SJ-8">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-8" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="どっち？" vertex="1">
+                    <mxGeometry height="40" width="120" x="220" y="950" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-16" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="たたく" vertex="1">
+                    <mxGeometry height="30" width="60" x="215" y="985" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-40" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="かぶる" vertex="1">
+                    <mxGeometry height="30" width="60" x="335" y="940" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-69" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-8" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="0MwF-1yYoj_ba8JJR2SJ-71">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-83" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-8" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="0MwF-1yYoj_ba8JJR2SJ-82">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-71" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="&lt;div&gt;じゃんけんの勝敗（人）&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="60" width="130" x="215" y="1015" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-74" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="勝ち" vertex="1">
+                    <mxGeometry height="30" width="60" x="215" y="1070" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-79" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="負け" vertex="1">
+                    <mxGeometry height="30" width="60" x="335" y="1045" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-82" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="&lt;div&gt;じゃんけんの勝敗（人）&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="60" width="130" x="419" y="1015" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-85" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="勝ち" vertex="1">
+                    <mxGeometry height="30" width="60" x="419" y="1070" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-87" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="負け" vertex="1">
+                    <mxGeometry height="30" width="60" x="534" y="1045" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e8" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-82" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-safe">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-safe" parent="1" style="whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="セーフを+1して戦績を表示" vertex="1">
+                    <mxGeometry height="50" width="120" x="580" y="1020" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e9" edge="1" parent="1" source="add-safe" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="0MwF-1yYoj_ba8JJR2SJ-53">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="640" y="175"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-75" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-71" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=40;entryDy=0;entryPerimeter=0;" target="0MwF-1yYoj_ba8JJR2SJ-96">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-96" parent="1" style="shape=display;whiteSpace=wrap;html=1;" value="勝ち" vertex="1">
+                    <mxGeometry height="40" width="80" x="240" y="1110" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e10" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-96" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0;exitDx=40;exitDy=40;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-win">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-win" parent="1" style="whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="勝ちを+1して戦績を表示" vertex="1">
+                    <mxGeometry height="50" width="120" x="220" y="1175" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e11" edge="1" parent="1" source="add-win" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-confetti">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-confetti" parent="1" style="shape=display;whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="紙吹雪を降らせる" vertex="1">
+                    <mxGeometry height="40" width="120" x="220" y="1250" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e12" edge="1" parent="1" source="add-confetti" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-win3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-win3" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;strokeColor=#FF0000;fontColor=#FF0000;" value="勝ちが3の倍数？" vertex="1">
+                    <mxGeometry height="60" width="130" x="215" y="1315" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e13" edge="1" parent="1" source="add-win3" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-fireworks">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-l1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#FF0000;" value="はい" vertex="1">
+                    <mxGeometry height="25" width="40" x="285" y="1373" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-fireworks" parent="1" style="shape=display;whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="大きな花火を打ち上げる" vertex="1">
+                    <mxGeometry height="40" width="120" x="220" y="1400" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e14" edge="1" parent="1" source="add-fireworks" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="0MwF-1yYoj_ba8JJR2SJ-48">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e15" edge="1" parent="1" source="add-win3" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="0MwF-1yYoj_ba8JJR2SJ-48">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="370" y="1345"/>
+                            <mxPoint x="370" y="1485"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="add-l2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#FF0000;" value="いいえ" vertex="1">
+                    <mxGeometry height="25" width="50" x="335" y="1318" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-48" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;strokeWidth=5;" value="" vertex="1">
+                    <mxGeometry height="30" width="30" x="265" y="1470" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-84" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-82" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=40;entryDy=0;entryPerimeter=0;" target="0MwF-1yYoj_ba8JJR2SJ-97">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-77" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-71" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=40;entryDy=0;entryPerimeter=0;" target="0MwF-1yYoj_ba8JJR2SJ-97">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="400" y="1045"/>
+                            <mxPoint x="400" y="1500"/>
+                            <mxPoint x="484" y="1500"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-89" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-81" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="0MwF-1yYoj_ba8JJR2SJ-97">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="160" y="830"/>
+                            <mxPoint x="160" y="1540"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-97" parent="1" style="shape=display;whiteSpace=wrap;html=1;" value="負け" vertex="1">
+                    <mxGeometry height="40" width="80" x="444" y="1520" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e16" edge="1" parent="1" source="0MwF-1yYoj_ba8JJR2SJ-97" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0;exitDx=40;exitDy=40;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-lose">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-lose" parent="1" style="whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="負けを+1して戦績を表示" vertex="1">
+                    <mxGeometry height="50" width="120" x="424" y="1585" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e17" edge="1" parent="1" source="add-lose" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-lose3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-lose3" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;strokeColor=#FF0000;fontColor=#FF0000;" value="負けが3回たまった？" vertex="1">
+                    <mxGeometry height="60" width="130" x="419" y="1660" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e18" edge="1" parent="1" source="add-lose3" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-gameover">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-l3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#FF0000;" value="はい" vertex="1">
+                    <mxGeometry height="25" width="40" x="489" y="1718" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-gameover" parent="1" style="shape=display;whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="「ざんねん…」画面を表示（雨・泣き顔）" vertex="1">
+                    <mxGeometry height="50" width="150" x="409" y="1750" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e19" edge="1" parent="1" source="add-gameover" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-reset3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-reset3" parent="1" style="whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="3.5秒後に戦績を0にリセット" vertex="1">
+                    <mxGeometry height="50" width="120" x="424" y="1825" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e20" edge="1" parent="1" source="add-reset3" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="0MwF-1yYoj_ba8JJR2SJ-50">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-e21" edge="1" parent="1" source="add-lose3" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="0MwF-1yYoj_ba8JJR2SJ-50">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="590" y="1690"/>
+                            <mxPoint x="590" y="1920"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="add-l4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#FF0000;" value="いいえ" vertex="1">
+                    <mxGeometry height="25" width="50" x="540" y="1663" as="geometry"/>
+                </mxCell>
+                <mxCell id="0MwF-1yYoj_ba8JJR2SJ-50" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;strokeWidth=5;" value="" vertex="1">
+                    <mxGeometry height="30" width="30" x="469" y="1905" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-r-title" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#FF0000;" value="リセットボタン" vertex="1">
+                    <mxGeometry height="30" width="110" x="680" y="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-r0" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;strokeColor=#FF0000;" value="" vertex="1">
+                    <mxGeometry height="20" width="20" x="725" y="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-re1" edge="1" parent="1" source="add-r0" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-r1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-r1" parent="1" style="html=1;strokeWidth=2;shape=manualInput;boundedLbl=1;whiteSpace=wrap;rounded=1;size=26;arcSize=11;strokeColor=#FF0000;fontColor=#FF0000;" value="リセットボタンを押す" vertex="1">
+                    <mxGeometry height="60" width="110" x="680" y="145" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-re2" edge="1" parent="1" source="add-r1" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-r2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-r2" parent="1" style="whiteSpace=wrap;html=1;strokeColor=#FF0000;fontColor=#FF0000;" value="戦績を0にして表示" vertex="1">
+                    <mxGeometry height="50" width="110" x="680" y="235" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-re3" edge="1" parent="1" source="add-r2" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FF0000;" target="add-r3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-r3" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;strokeWidth=5;strokeColor=#FF0000;" value="" vertex="1">
+                    <mxGeometry height="30" width="30" x="720" y="310" as="geometry"/>
+                </mxCell>
+                <mxCell id="-oL6Pv_Caz45w9jVNhmA-1" parent="1" style="html=1;strokeWidth=2;shape=manualInput;boundedLbl=1;whiteSpace=wrap;rounded=1;size=26;arcSize=11;" value="人のプロセス" vertex="1">
+                    <mxGeometry height="50" width="80" x="75" y="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="-oL6Pv_Caz45w9jVNhmA-2" parent="1" style="whiteSpace=wrap;html=1;" value="コンピューターのプロセス" vertex="1">
+                    <mxGeometry height="40" width="90" x="70" y="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="-oL6Pv_Caz45w9jVNhmA-3" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="分岐" vertex="1">
+                    <mxGeometry height="40" width="90" x="70" y="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="-oL6Pv_Caz45w9jVNhmA-4" parent="1" style="shape=display;whiteSpace=wrap;html=1;" value="画面描画" vertex="1">
+                    <mxGeometry height="40" width="80" x="75" y="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="-oL6Pv_Caz45w9jVNhmA-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="凡例" vertex="1">
+                    <mxGeometry height="30" width="60" x="85" y="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="add-legend" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=#FF0000;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#FF0000;" value="赤：Ver.2 変更点" vertex="1">
+                    <mxGeometry height="30" width="110" x="60" y="285" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

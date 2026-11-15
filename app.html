@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>たたいてかぶってじゃんけんぽん</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="game">
+        <h1 class="title">たたいて・かぶって じゃんけんぽん</h1>
+
+        <!-- ===== 戦績のスコアボード（「SCORE」・3つのマス・リセットを1段に並べる） ===== -->
+        <section class="scoreboard">
+            <p class="scoreboard-title">SCORE</p>
+            <div class="scoreboard-body">
+                <div class="score-cell score-win">
+                    <p class="score-label">勝ち</p>
+                    <p class="score-number" id="win-count">00</p>
+                </div>
+                <div class="score-cell score-lose">
+                    <p class="score-label">負け</p>
+                    <p class="score-number" id="lose-count">00</p>
+                </div>
+                <div class="score-cell score-safe">
+                    <p class="score-label">セーフ</p>
+                    <p class="score-number" id="safe-count">00</p>
+                </div>
+            </div>
+            <button class="btn-reset" id="btn-reset">リセット</button>
+        </section>
+
+        <!-- ===== 対戦の表示エリア ===== -->
+        <section class="board">
+            <!-- 「じゃん」「けん」「ぽん！」を大きく出す場所（ふだんは見えない） -->
+            <p class="call" id="call"></p>
+
+            <div class="player">
+                <p class="player-name">あなた</p>
+                <!-- JavaScriptで ✊ ✌️ ✋ を入れる場所 -->
+                <p class="hand" id="player-hand">？</p>
+            </div>
+
+            <p class="vs">VS</p>
+
+            <div class="player">
+                <p class="player-name">コンピューター</p>
+                <p class="hand" id="cpu-hand">？</p>
+            </div>
+        </section>
+
+        <!-- ===== メッセージ（あいこ！ / 勝ち！ / 負け… など） ===== -->
+        <p class="message" id="message">じゃんけんの手を選んでね</p>
+
+        <!-- ===== ① じゃんけんの手を選ぶボタン ===== -->
+        <section class="buttons" id="janken-area">
+            <button class="btn" id="btn-gu">✊<span>グー</span></button>
+            <button class="btn" id="btn-choki">✌️<span>チョキ</span></button>
+            <button class="btn" id="btn-pa">✋<span>パー</span></button>
+        </section>
+
+        <!-- ===== ② たたく or かぶるを選ぶボタン（最初は隠しておく） ===== -->
+        <section class="buttons hidden" id="action-area">
+            <button class="btn btn-tataku" id="btn-tataku">🔨<span>たたく</span></button>
+            <button class="btn btn-kaburu" id="btn-kaburu">⛑️<span>かぶる</span></button>
+        </section>
+
+        <!-- ===== もう一回ボタン（最初は隠しておく） ===== -->
+        <button class="btn-restart hidden" id="btn-restart">もう一回あそぶ</button>
+    </main>
+
+    <!-- ===== 負けが3回たまったときの「ざんねん」画面（最初は隠しておく） ===== -->
+    <div class="gameover hidden" id="gameover">
+        <p class="gameover-face">😭</p>
+        <p class="gameover-text">ざんねん…</p>
+        <p class="gameover-sub">3回負けたので、やり直し・・！！</p>
+    </div>
+
+    <script>
+        const btnGu = document.getElementById("btn-gu");
+        const btnChoki = document.getElementById("btn-choki");
+        const btnPa = document.getElementById("btn-pa");
+        const btnTataku = document.getElementById("btn-tataku");
+        const btnKaburu = document.getElementById("btn-kaburu");
+        const btnRestart = document.getElementById("btn-restart");
+        const btnReset = document.getElementById("btn-reset");
+
+        const hands = ["✊", "✌️", "✋"];
+        const jankenArea = document.getElementById("janken-area");
+        const actionArea = document.getElementById("action-area");
+
+        // よく使う要素は、最初に1回だけ取り出しておく
+        const message = document.getElementById("message");
+        const playerHandEl = document.getElementById("player-hand");
+        const cpuHandEl = document.getElementById("cpu-hand");
+        const call = document.getElementById("call");
+        const gameover = document.getElementById("gameover");
+
+        let jankenResult = ""; // じゃんけんの勝敗を格納する変数
+        let timerID = null; // タイマーのIDを格納する変数
+
+        // ===== 戦績カウンター用の変数 =====
+        let winCount = 0;  // 勝った回数
+        let loseCount = 0; // 負けた回数
+        let safeCount = 0; // セーフの回数
+
+        // ===== 戦績を画面に書き出す関数 =====
+        // padStart(2, "0") で、1 → "01" のように2ケタにそろえる（スコアボードっぽく）
+        function showScore() {
+            document.getElementById("win-count").textContent = String(winCount).padStart(2, "0");
+            document.getElementById("lose-count").textContent = String(loseCount).padStart(2, "0");
+            document.getElementById("safe-count").textContent = String(safeCount).padStart(2, "0");
+        }
+
+        // ===== 戦績をゼロに戻す関数 =====
+        // （リセットボタンと、3回負けたときの両方で使う）
+        function resetScore() {
+            winCount = 0;
+            loseCount = 0;
+            safeCount = 0;
+            showScore();
+        }
+
+        // ===== リセットボタン =====
+        btnReset.addEventListener("click", function () {
+            resetScore();
+        });
+
+        // ===== 負けが3回たまったかを調べる関数 =====
+        function checkLoseLimit() {
+            if (loseCount >= 3) {
+                showGameOver();
+            }
+        }
+
+        // ===== 「ざんねん…」画面を出して、戦績をリセットする関数 =====
+        function showGameOver() {
+            gameover.classList.remove("hidden");
+
+            // 画面に雨を降らせる
+            for (let i = 0; i < 40; i++) {
+                const drop = document.createElement("div");
+                drop.className = "raindrop";
+                drop.style.left = Math.random() * 100 + "%";
+                drop.style.animationDuration = Math.random() * 0.4 + 0.6 + "s"; // 0.6〜1秒
+                drop.style.animationDelay = Math.random() * 1 + "s";
+                gameover.appendChild(drop);
+            }
+
+            // 3.5秒たったら画面を閉じて、戦績をゼロにする
+            setTimeout(function () {
+                gameover.classList.add("hidden");
+
+                // 雨つぶを全部取りのぞく
+                const drops = gameover.querySelectorAll(".raindrop");
+                for (let i = 0; i < drops.length; i++) {
+                    drops[i].remove();
+                }
+
+                resetScore();
+            }, 3500);
+        }
+
+        // ===== 自分の選択した手を画面に表示する =====
+        btnGu.addEventListener("click", function () {
+            playJanken("✊");
+        });
+        btnChoki.addEventListener("click", function () {
+            playJanken("✌️");
+        });
+        btnPa.addEventListener("click", function () {
+            playJanken("✋");
+        });
+
+        // ===== 3つの手に同一の処理を実行するためのまとめ関数 =====
+        function playJanken(playerHand) {
+            // ===== 連打対策 =====
+            // 押した瞬間にボタンを隠すので、2回目は押せない → タイマーが2重に動かない
+            jankenArea.classList.add("hidden");
+
+            // 手を「？」に戻す
+            playerHandEl.textContent = "？";
+            cpuHandEl.textContent = "？";
+
+            // ===== 「じゃん・けん・ぽん！」の演出 =====
+            // 吹き出しは一度見えなくして、対戦エリアの上に大きな文字を出す
+            message.classList.add("invisible");
+
+            // setTimeout の待ち時間をずらして、文字を順番に出していく
+            showCall("じゃん");
+
+            setTimeout(function () {
+                showCall("けん");
+            }, 500);
+
+            setTimeout(function () {
+                showCall("ぽん！");
+
+                // コンピュータの手をランダムに決める
+                const cpuHand = hands[Math.floor(Math.random() * 3)];
+
+                // 両方の手を「ポンッ」と出す
+                showHand(playerHandEl, playerHand);
+                showHand(cpuHandEl, cpuHand);
+
+                // 手を見せてから、少しだけ待って勝敗を出す
+                setTimeout(function () {
+                    judgeJanken(playerHand, cpuHand);
+                }, 500);
+            }, 1000);
+        }
+
+        // ===== じゃんけんの勝敗を判断する関数 =====
+        function judgeJanken(playerHand, cpuHand) {
+            message.classList.remove("invisible"); // 吹き出しをまた見えるようにする
+
+            if (playerHand === cpuHand) {
+                message.textContent = "あいこ！もう一回！";
+                jankenArea.classList.remove("hidden"); // もう一度じゃんけんボタンを出す
+            } else if ((playerHand === "✊" && cpuHand === "✌️") ||
+                (playerHand === "✌️" && cpuHand === "✋") ||
+                (playerHand === "✋" && cpuHand === "✊")) {
+                message.textContent = "たたくか？かぶるか？";
+                jankenResult = "win"; // じゃんけんに勝った場合
+                actionArea.classList.remove("hidden"); // たたく or かぶるエリアを表示する
+                startTimer(); // タイマーをスタートする
+            } else {
+                message.textContent = "たたくか？かぶるか？";
+                jankenResult = "lose"; // じゃんけんに負けた場合
+                actionArea.classList.remove("hidden");
+                startTimer(); // タイマーをスタートする
+            }
+        }
+
+        // ==== タイマーをスタートする関数 =====
+        function startTimer() {
+            const timeLimit = Math.random() * 1500 + 1000; // 1秒〜2.5秒のランダムな時間を設定
+            timerID = setTimeout(function () {
+                message.textContent = "時間切れ！あなたの負け…";
+                loseCount++;
+                showScore();
+                checkLoseLimit(); // 3回負けていたら「ざんねん…」
+                actionArea.classList.add("hidden");
+                btnRestart.classList.remove("hidden");
+            }, timeLimit);
+        }
+
+        // ===== たたく or かぶるのボタンにイベントを追加 =====
+        btnTataku.addEventListener("click", function () {
+            chooseAction("たたく");
+        });
+        btnKaburu.addEventListener("click", function () {
+            chooseAction("かぶる");
+        });
+
+        // ===== たたく or かぶるの選択に応じたアクション =====
+        function chooseAction(action) {
+            clearTimeout(timerID); // タイマーを止める
+            actionArea.classList.add("hidden"); // 連打対策：押した瞬間に隠す
+
+            // じゃんけんの勝敗と選択したアクションに応じてメッセージを表示する
+            if (jankenResult === "win" && action === "たたく") {
+                message.textContent = "あなたの勝ち！";
+                winCount++;
+                showConfetti(); // 紙吹雪！
+                // 勝ちが3回たまるごとに（3, 6, 9…）花火も出す
+                // % は「わり算のあまり」。3でわってあまりが0なら3の倍数
+                if (winCount % 3 === 0) {
+                    showFireworks();
+                }
+                btnRestart.classList.remove("hidden");
+            } else if (jankenResult === "lose" && action === "かぶる") {
+                message.textContent = "セーフ！";
+                safeCount++;
+                // かぶるが成功した場合、じゃんけんエリアを再表示する
+                jankenArea.classList.remove("hidden");
+            } else {
+                message.textContent = "あなたの負け…";
+                loseCount++;
+                btnRestart.classList.remove("hidden");
+            }
+            showScore();
+            checkLoseLimit(); // 3回負けていたら「ざんねん…」
+        }
+
+        btnRestart.addEventListener("click", function () {
+            // じゃんけんエリアを再表示する
+            jankenArea.classList.remove("hidden");
+            // たたく or かぶるエリアを隠す
+            actionArea.classList.add("hidden");
+            // リスタートボタンを隠す
+            btnRestart.classList.add("hidden");
+            // メッセージを初期化する
+            message.textContent = "じゃんけんの手を選んでね";
+            // 手の表示を初期化する
+            playerHandEl.textContent = "？";
+            cpuHandEl.textContent = "？";
+            // じゃんけんの勝敗を初期化する（戦績はリセットしない）
+            jankenResult = "";
+        });
+
+        // ===== 手を「ポンッ」と出す関数 =====
+        function showHand(element, hand) {
+            element.textContent = hand;
+            playPop(element);
+        }
+
+        // ===== 「じゃん」「けん」「ぽん！」を大きく出す関数 =====
+        function showCall(text) {
+            call.textContent = text;
+            // playPop と同じく、クラスを付け直して毎回アニメーションさせる
+            call.classList.remove("show");
+            void call.offsetWidth;
+            call.classList.add("show");
+        }
+
+        // ===== 「pop」クラスを付けてアニメーションさせる関数 =====
+        function playPop(element) {
+            // 一度クラスを外してから付け直すと、何回でもアニメーションが動く
+            element.classList.remove("pop");
+            void element.offsetWidth; // ブラウザに「外した」ことを気づかせるおまじない
+            element.classList.add("pop");
+        }
+
+        // アニメーションが終わったら「pop」クラスを外す（元のふわふわに戻る）
+        function removePop(event) {
+            event.target.classList.remove("pop");
+        }
+        playerHandEl.addEventListener("animationend", removePop);
+        cpuHandEl.addEventListener("animationend", removePop);
+
+        // 紙吹雪と花火で使う色
+        const colors = ["#ff5fa2", "#ffd93d", "#4fe3c1", "#5bc8ff", "#9b6bff"];
+
+        // ===== 紙吹雪を降らせる関数 =====
+        function showConfetti() {
+            for (let i = 0; i < 60; i++) {
+                // 紙吹雪1枚ぶんの div を作る
+                const piece = document.createElement("div");
+                piece.className = "confetti";
+
+                // 位置・色・落ちる速さをバラバラにする
+                piece.style.left = Math.random() * 100 + "vw";
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animationDuration = Math.random() * 2 + 2 + "s"; // 2〜4秒
+                piece.style.animationDelay = Math.random() * 0.5 + "s";
+
+                document.body.appendChild(piece);
+
+                // 落ちきったら消す（画面に残り続けないように）
+                setTimeout(function () {
+                    piece.remove();
+                }, 5000);
+            }
+        }
+
+        // ===== 大きな花火を打ち上げる関数 =====
+        function showFireworks() {
+            // 0.4秒ずつずらして、6発打ち上げる
+            for (let i = 0; i < 6; i++) {
+                setTimeout(function () {
+                    launchFirework();
+                }, i * 400);
+            }
+        }
+
+        // ===== 花火1発ぶん =====
+        function launchFirework() {
+            // 花火が開く場所（画面の上半分のどこか）
+            const x = Math.random() * 80 + 10; // 横：画面の10%〜90%
+            const y = Math.random() * 35 + 15; // 縦：画面の15%〜50%
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const sparkCount = 40; // 火花の数
+
+            for (let i = 0; i < sparkCount; i++) {
+                const spark = document.createElement("div");
+                spark.className = "spark";
+                spark.style.left = x + "vw";
+                spark.style.top = y + "vh";
+                spark.style.backgroundColor = color;
+
+                // 火花を円の形に、ぐるっと360度に飛ばす
+                const angle = (i / sparkCount) * Math.PI * 2;  // 飛ぶ向き
+                const distance = Math.random() * 80 + 120;     // 飛ぶきょり（120〜200px）
+                // CSSの変数 --x と --y に、どこまで飛ぶかを渡す
+                spark.style.setProperty("--x", Math.cos(angle) * distance + "px");
+                spark.style.setProperty("--y", Math.sin(angle) * distance + "px");
+
+                document.body.appendChild(spark);
+
+                // 消えたら取りのぞく
+                setTimeout(function () {
+                    spark.remove();
+                }, 1500);
+            }
+        }
+    </script>
+</body>
+
+</html>
